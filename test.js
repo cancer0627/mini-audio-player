@@ -16,25 +16,17 @@ grd.addColorStop(0.3, "#fff");
 grd.addColorStop(1, "#D8FF30");
 setupAudioNodes();
 add_btn.onclick = function () {
+    var file = file_btn.files[0];
+    var url = URL.createObjectURL(file);
     if (sourceNode.buffer) {
-        if (sourceNode.context.currentTime >= sourceNode.buffer.duration) {
-            init();
-            setupAudioNodes();
-            var file = file_btn.files[0];
-            var url = URL.createObjectURL(file);
-            loadSound(url);
-        }
-        else {
-            console.log(sourceNode);
-            console.log(sourceNode.context.currentTime + '---' + sourceNode.buffer.duration);
-            alert('这首歌还没结束！！！');
-        }
+        sourceNode.stop();
+        init();
+        setupAudioNodes();
+        loadSound(url);
     }
     else{
         init();
         setupAudioNodes();
-        var file = file_btn.files[0];
-        var url = URL.createObjectURL(file);
         loadSound(url);
     }
 };
